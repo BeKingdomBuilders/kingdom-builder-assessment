@@ -1189,6 +1189,18 @@ function renderResults(firstName) {
 
 // Start
 renderQuestion();
+  // Auto-resize communicator
+function kbaSendHeight() {
+  var height = document.getElementById('kba-root').scrollHeight;
+  window.parent.postMessage({ kbaHeight: height }, '*');
+}
+
+// Send on load and after every state change
+kbaSendHeight();
+var kbaResizeObserver = new ResizeObserver(function() {
+  kbaSendHeight();
+});
+kbaResizeObserver.observe(document.getElementById('kba-root'));
 </script>
 </body>
 </html>
