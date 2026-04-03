@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kingdom Builder Assessment | Be Kingdom Builders</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --alabaster: #f1e9db;
+    --night: #171614;
+    --violet: #70587c;
+    --red: #ed474a;
+    --night-2: #1f1d1b;
+    --night-3: #2a2724;
+    --alabaster-dim: rgba(241,233,219,0.6);
+    --alabaster-dimmer: rgba(241,233,219,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--night);
+    color: var(--alabaster);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      radial-gradient(ellipse at 20% 50%, rgba(112,88,124,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(237,71,74,0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .assessment-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .brand-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--violet);
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: clamp(28px, 5vw, 44px);
+    line-height: 1.1;
+    color: var(--alabaster);
+    margin-bottom: 16px;
+  }
+
+  .header h1 span {
+    color: var(--red);
+  }
+
+  .header p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--alabaster-dim);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  /* PROGRESS */
+  .progress-wrap {
+    margin-bottom: 36px;
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .progress-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--violet);
+  }
+
+  .progress-count {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--alabaster-dim);
+  }
+
+  .progress-bar-track {
+    height: 3px;
+    background: var(--alabaster-dimmer);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--violet), var(--red));
+    border-radius: 2px;
+    transition: width 0.5s ease;
+  }
+
+  /* QUESTION CARD */
+  .question-card {
+    background: var(--night-2);
+    border: 1px solid rgba(241,233,219,0.08);
+    border-radius: 4px;
+    padding: 40px 40px 36px;
+    margin-bottom: 20px;
+    animation: fadeSlide 0.35s ease;
+  }
+
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .question-number {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .question-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: clamp(17px, 2.5vw, 21px);
+    line-height: 1.35;
+    color: var(--alabaster);
+    margin-bottom: 32px;
+  }
+
+  /* ANSWER OPTIONS */
+  .options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .option-btn {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 20px;
+    background: transparent;
+    border: 1px solid rgba(241,233,219,0.12);
+    border-radius: 3px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+    width: 100%;
+  }
+
+  .option-btn:hover {
+    border-color: var(--violet);
+    background: rgba(112,88,124,0.08);
+  }
+
+  .option-btn.selected {
+    border-color: var(--red);
+    background: rgba(237,71,74,0.08);
+  }
+
+  .option-indicator {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: 50%;
+    border: 2px solid rgba(241,233,219,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+    transition: all 0.2s ease;
+  }
+
+  .option-btn.selected .option-indicator {
+    border-color: var(--red);
+    background: var(--red);
+  }
+
+  .option-btn.selected .option-indicator::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+  }
+
+  .option-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--alabaster);
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  .option-btn.selected .option-text {
+    color: var(--alabaster);
+  }
+
+  /* NAV BUTTONS */
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .btn-back {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--alabaster-dim);
+    background: transparent;
+    border: 1px solid rgba(241,233,219,0.15);
+    padding: 13px 24px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-back:hover {
+    color: var(--alabaster);
+    border-color: rgba(241,233,219,0.3);
+  }
+
+  .btn-next {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: white;
+    background: var(--red);
+    border: none;
+    padding: 14px 32px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 1;
+    max-width: 280px;
+  }
+
+  .btn-next:hover:not(:disabled) {
+    background: #d93d40;
+    transform: translateY(-1px);
+  }
+
+  .btn-next:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* FORM GATE */
+  .form-gate {
+    background: var(--night-2);
+    border: 1px solid rgba(241,233,219,0.08);
+    border-radius: 4px;
+    padding: 48px 40px;
+    text-align: center;
+    animation: fadeSlide 0.4s ease;
+  }
+
+  .form-gate .gate-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(237,71,74,0.12);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+  }
+
+  .form-gate .gate-icon svg {
+    width: 26px;
+    height: 26px;
+    stroke: var(--red);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .form-gate h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: clamp(22px, 3.5vw, 30px);
+    line-height: 1.2;
+    color: var(--alabaster);
+    margin-bottom: 12px;
+  }
+
+  .form-gate p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--alabaster-dim);
+    max-width: 480px;
+    margin: 0 auto 32px;
+  }
+
+  .form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 420px;
+    margin: 0 auto 24px;
+    text-align: left;
+  }
+
+  .field-row {
+    display: flex;
+    gap: 12px;
+  }
+
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+  }
+
+  .field-group label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--violet);
+  }
+
+  .field-group input {
+    background: var(--night-3);
+    border: 1px solid rgba(241,233,219,0.12);
+    border-radius: 3px;
+    padding: 13px 16px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    color: var(--alabaster);
+    width: 100%;
+    transition: border-color 0.2s ease;
+    outline: none;
+  }
+
+  .field-group input::placeholder {
+    color: rgba(241,233,219,0.3);
+  }
+
+  .field-group input:focus {
+    border-color: var(--violet);
+  }
+
+  .field-group input.error {
+    border-color: var(--red);
+  }
+
+  .optional-tag {
+    color: rgba(241,233,219,0.35);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 10px;
+    margin-left: 4px;
+  }
+
+  .btn-reveal {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: white;
+    background: var(--red);
+    border: none;
+    padding: 16px 40px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .btn-reveal:hover {
+    background: #d93d40;
+    transform: translateY(-1px);
+  }
+
+  .privacy-note {
+    font-size: 12px;
+    color: rgba(241,233,219,0.3);
+    margin-top: 14px;
+    font-style: italic;
+  }
+
+  .error-msg {
+    color: var(--red);
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-align: center;
+    margin-top: -8px;
+    display: none;
+  }
+
+  /* RESULTS */
+  .results-wrap {
+    animation: fadeSlide 0.5s ease;
+  }
+
+  .result-stage-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--violet);
+    text-align: center;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .result-stage-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: clamp(32px, 6vw, 52px);
+    line-height: 1.05;
+    color: var(--alabaster);
+    text-align: center;
+    margin-bottom: 6px;
+  }
+
+  .result-stage-name span {
+    color: var(--red);
+  }
+
+  .result-verse {
+    font-family: 'Open Sans', sans-serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--violet);
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .result-card {
+    background: var(--night-2);
+    border: 1px solid rgba(241,233,219,0.08);
+    border-radius: 4px;
+    padding: 36px 40px;
+    margin-bottom: 20px;
+  }
+
+  .result-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 14px;
+  }
+
+  .result-card p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--alabaster);
+  }
+
+  .result-card p + p {
+    margin-top: 14px;
+  }
+
+  .result-card .scripture {
+    font-style: italic;
+    color: var(--alabaster-dim);
+    font-size: 15px;
+    border-left: 3px solid var(--violet);
+    padding-left: 16px;
+    margin-top: 18px;
+  }
+
+  /* NEXT STEPS */
+  .next-steps-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .next-step-card {
+    background: var(--night-2);
+    border: 1px solid rgba(241,233,219,0.08);
+    border-radius: 4px;
+    padding: 24px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: block;
+  }
+
+  .next-step-card:hover {
+    border-color: var(--violet);
+    transform: translateY(-2px);
+  }
+
+  .next-step-card.primary {
+    border-color: var(--red);
+    background: rgba(237,71,74,0.06);
+    grid-column: 1 / -1;
+  }
+
+  .next-step-card.primary:hover {
+    border-color: var(--red);
+    background: rgba(237,71,74,0.1);
+  }
+
+  .step-tag {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--violet);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .next-step-card.primary .step-tag {
+    color: var(--red);
+  }
+
+  .step-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--alabaster);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .step-desc {
+    font-size: 13px;
+    color: var(--alabaster-dim);
+    line-height: 1.5;
+  }
+
+  .step-arrow {
+    display: inline-block;
+    color: var(--red);
+    margin-top: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  /* STAGE INDICATOR */
+  .stage-indicator {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+
+  .stage-dot {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--alabaster-dimmer);
+    flex: 1;
+    max-width: 80px;
+    transition: background 0.3s ease;
+  }
+
+  .stage-dot.active {
+    background: var(--red);
+  }
+
+  .stage-dot.passed {
+    background: var(--violet);
+  }
+
+  /* HIDDEN */
+  .hidden { display: none !important; }
+
+  /* MOBILE */
+  @media (max-width: 600px) {
+    .assessment-wrap { padding: 32px 16px 60px; }
+    .question-card { padding: 28px 20px 24px; }
+    .form-gate { padding: 36px 20px; }
+    .result-card { padding: 24px 20px; }
+    .next-steps-grid { grid-template-columns: 1fr; }
+    .next-step-card.primary { grid-column: 1; }
+    .field-row { flex-direction: column; }
+    .nav-row { flex-direction: column-reverse; }
+    .btn-back { width: 100%; }
+    .btn-next { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="assessment-wrap">
+
+  <!-- HEADER -->
+  <div class="header" id="assessment-header">
+    <span class="brand-label">Be Kingdom Builders</span>
+    <h1>The Kingdom Builder<br><span>Assessment</span></h1>
+    <p>10 questions. Honest answers. Find out exactly where you are in your walk with God — and what your next step forward looks like.</p>
+  </div>
+
+  <!-- PROGRESS (hidden until quiz starts) -->
+  <div class="progress-wrap hidden" id="progress-wrap">
+    <div class="progress-meta">
+      <span class="progress-label">Your Progress</span>
+      <span class="progress-count" id="progress-count">Question 1 of 10</span>
+    </div>
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" id="progress-fill" style="width: 10%"></div>
+    </div>
+  </div>
+
+  <!-- QUIZ CONTAINER -->
+  <div id="quiz-container"></div>
+
+  <!-- FORM GATE -->
+  <div class="form-gate hidden" id="form-gate">
+    <div class="gate-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <h2>Your Results Are Ready.</h2>
+    <p>Enter your name and email to see your Kingdom Builder stage — and get a clear, biblical path forward.</p>
+    <div class="form-fields">
+      <div class="field-row">
+        <div class="field-group">
+          <label>First Name</label>
+          <input type="text" id="field-first" placeholder="First name" autocomplete="given-name">
+        </div>
+        <div class="field-group">
+          <label>Last Name <span class="optional-tag">optional</span></label>
+          <input type="text" id="field-last" placeholder="Last name" autocomplete="family-name">
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Email Address</label>
+        <input type="email" id="field-email" placeholder="your@email.com" autocomplete="email">
+      </div>
+    </div>
+    <div class="error-msg" id="form-error">Please enter your first name and a valid email address.</div>
+    <button class="btn-reveal" onclick="revealResults()">Reveal My Results →</button>
+    <p class="privacy-note">We respect your inbox. No spam, ever. Unsubscribe anytime.</p>
+  </div>
+
+  <!-- RESULTS CONTAINER -->
+  <div class="results-wrap hidden" id="results-container"></div>
+
+</div>
+
+<script>
+const questions = [
+  {
+    id: 1,
+    text: "When you think about your relationship with God right now, which best describes where you are?",
+    options: [
+      { text: "I'm not sure I'm truly saved or where I stand with God.", score: 1 },
+      { text: "I believe, but my faith feels mostly routine and disconnected.", score: 2 },
+      { text: "I know God but I'm stuck in patterns I can't seem to break.", score: 3 },
+      { text: "I'm walking with God but my consistency isn't where it needs to be.", score: 4 },
+      { text: "I'm grounded and actively serving, discipling, or leading others.", score: 5 }
+    ]
+  },
+  {
+    id: 2,
+    text: "How would you describe your relationship with the Bible right now?",
+    options: [
+      { text: "I rarely read it — it feels distant or hard to understand.", score: 1 },
+      { text: "I read it occasionally but don't have a consistent practice.", score: 2 },
+      { text: "I read regularly but still struggle to apply what I'm reading.", score: 3 },
+      { text: "I'm in the Word consistently and it's shaping my daily decisions.", score: 4 },
+      { text: "Scripture is foundational to everything — I study it and teach it to others.", score: 5 }
+    ]
+  },
+  {
+    id: 3,
+    text: "Is there a specific sin pattern, stronghold, or mindset that keeps resurfacing in your life?",
+    options: [
+      { text: "I haven't really examined this honestly.", score: 1 },
+      { text: "I know something is off but I haven't named it yet.", score: 2 },
+      { text: "Yes — I can name it and I've tried to break it but keep returning.", score: 3 },
+      { text: "I've broken free from major patterns but temptation still hits.", score: 4 },
+      { text: "I walk in consistent freedom and help others break their chains.", score: 5 }
+    ]
+  },
+  {
+    id: 4,
+    text: "How clearly do you understand your identity in Christ?",
+    options: [
+      { text: "I struggle to believe God truly loves or has a purpose for me.", score: 1 },
+      { text: "I know the doctrine but it doesn't feel real in my daily life.", score: 2 },
+      { text: "I believe it but shame, fear, or past sin still clouds my identity.", score: 3 },
+      { text: "My identity in Christ is settled — I walk in it most of the time.", score: 4 },
+      { text: "I'm fully grounded and help others discover who they are in Him.", score: 5 }
+    ]
+  },
+  {
+    id: 5,
+    text: "When God calls you to obey something uncomfortable, what usually happens?",
+    options: [
+      { text: "I'm not sure I hear God's voice clearly enough to know when He's speaking.", score: 1 },
+      { text: "I hear it but tend to delay, rationalize, or avoid it.", score: 2 },
+      { text: "I want to obey but fear, doubt, or sin patterns get in the way.", score: 3 },
+      { text: "I mostly obey but I still wrestle with full surrender in certain areas.", score: 4 },
+      { text: "Obedience is my first response — I've learned to trust God's voice quickly.", score: 5 }
+    ]
+  },
+  {
+    id: 6,
+    text: "How would you describe your prayer life?",
+    options: [
+      { text: "I rarely pray — it feels pointless or I don't know how.", score: 1 },
+      { text: "I pray occasionally, mostly when things get hard.", score: 2 },
+      { text: "I pray regularly but it often feels dry or one-sided.", score: 3 },
+      { text: "Prayer is a real rhythm in my life and I experience God in it.", score: 4 },
+      { text: "Prayer is how I lead and intercede for others — it's central to my life.", score: 5 }
+    ]
+  },
+  {
+    id: 7,
+    text: "Do you have genuine spiritual accountability in your life?",
+    options: [
+      { text: "No — I carry my struggles completely alone.", score: 1 },
+      { text: "I have Christian friends but we don't go deep or hold each other accountable.", score: 2 },
+      { text: "I've tried accountability but something always breaks down.", score: 3 },
+      { text: "Yes — I have at least one person who knows my real walk and calls me higher.", score: 4 },
+      { text: "I both receive accountability and provide it to others I'm discipling.", score: 5 }
+    ]
+  },
+  {
+    id: 8,
+    text: "How do you feel about the theological foundation of your faith?",
+    options: [
+      { text: "I have a lot of basic questions I've never had answered.", score: 1 },
+      { text: "I know the basics but I couldn't defend my faith if challenged.", score: 2 },
+      { text: "I have solid doctrine but struggle to connect it to daily obedience.", score: 3 },
+      { text: "My theological foundation is strong and it anchors my walk.", score: 4 },
+      { text: "I teach, mentor, or disciple others from a strong biblical foundation.", score: 5 }
+    ]
+  },
+  {
+    id: 9,
+    text: "Are you actively building God's Kingdom beyond your own personal growth?",
+    options: [
+      { text: "I'm not sure what that even means for my life yet.", score: 1 },
+      { text: "I want to — but I feel too stuck personally to think about others right now.", score: 2 },
+      { text: "I serve occasionally but I don't have a clear sense of calling or direction.", score: 3 },
+      { text: "I'm beginning to step into serving and leading — it's becoming clearer.", score: 4 },
+      { text: "I'm actively discipling, leading, or multiplying Kingdom impact where God has placed me.", score: 5 }
+    ]
+  },
+  {
+    id: 10,
+    text: "If you're completely honest, what is the single biggest thing standing between you and the life God is calling you to?",
+    options: [
+      { text: "I'm not sure I've truly surrendered my life to Christ.", score: 1 },
+      { text: "A religious mindset — going through the motions without real transformation.", score: 2 },
+      { text: "A specific stronghold, sin pattern, or mindset I haven't fully broken.", score: 3 },
+      { text: "Inconsistency — I know the truth but I'm not living it every day.", score: 4 },
+      { text: "Inward focus — I need to shift from growing personally to multiplying outward.", score: 5 }
+    ]
+  }
+];
+
+const stages = {
+  1: {
+    name: "Awakening",
+    tagline: "The beginning of everything.",
+    verse: "\"Draw near to God, and he will draw near to you.\" — James 4:8",
+    description: `Your results point to Stage 1: Awakening. This is where real faith begins — not with religion, but with honest surrender.
+
+You may have been in and around Christianity for years, but something isn't connecting. Your faith feels more like a routine than a relationship. You might carry doubts about your standing with God, questions about whether you're truly saved, or a deep sense that something fundamental is missing.
+
+That tension is not condemnation. It's the Holy Spirit drawing you in. The fact that you took this assessment means God is already moving.`,
+    block: `The Awakening stage exists for believers who are drifting, stuck in routine, or uncertain of their true standing with God. It confronts passive Christianity at the root and establishes the foundation of genuine, surrendered faith. This is where the real walk with Christ begins — not performance, not religion, but real relationship built on repentance and surrender.`,
+    primary: {
+      tag: "Your First Step",
+      title: "Join the Free Kingdom Builders Community",
+      desc: "Start your Awakening journey inside our free Skool community — structured teaching, real discipleship, and believers walking this out with you.",
+      url: "https://skool.com/be-kingdom-builders-3106",
+      arrow: "Join Free →"
+    },
+    secondary: [
+      {
+        tag: "Free Resource",
+        title: "Breaking Strongholds Ebook",
+        desc: "A biblical starting point for naming what's been holding you back.",
+        url: "https://bekingdombuilders.com/strongholds",
+        arrow: "Get the Ebook →"
+      },
+      {
+        tag: "Weekly Teaching",
+        title: "Subscribe on YouTube",
+        desc: "Deep biblical teaching every week — no fluff, no religion.",
+        url: "https://youtube.com/BeKingdomBuilders",
+        arrow: "Subscribe →"
+      }
+    ]
+  },
+  2: {
+    name: "Foundation",
+    tagline: "Truth you can stand on.",
+    verse: "\"Everyone then who hears these words of mine and does them will be like a wise man who built his house on the rock.\" — Matthew 7:24",
+    description: `Your results point to Stage 2: Foundation. You believe — genuinely. But your faith is still waiting for the theological bedrock it needs to hold firm under pressure.
+
+You love God but couldn't fully articulate what you believe or defend it if someone pushed back. You know the stories but the bigger biblical picture — how it all connects, why it matters, how to apply it — is still fuzzy. That gap is exactly what the enemy exploits.
+
+Without solid foundation, believers are vulnerable to false teaching, spiritual weakness, and the kind of doubt that sends them back to passivity every time.`,
+    block: `The Foundation stage is for sincere believers who lack the biblical and doctrinal grounding to stand firm. It builds the theological foundation that everything else in your walk with God depends on. You cannot build something permanent on uncertain ground. This stage gives you the bedrock.`,
+    primary: {
+      tag: "Your First Step",
+      title: "Join the Free Kingdom Builders Community",
+      desc: "The Foundation track inside our Skool community is built specifically for where you are — systematic, Scripture-first, and practical.",
+      url: "https://skool.com/be-kingdom-builders-3106",
+      arrow: "Join Free →"
+    },
+    secondary: [
+      {
+        tag: "Free Resource",
+        title: "Breaking Strongholds Ebook",
+        desc: "Start identifying and tearing down what's been blocking your foundation.",
+        url: "https://bekingdombuilders.com/strongholds",
+        arrow: "Get the Ebook →"
+      },
+      {
+        tag: "Weekly Teaching",
+        title: "Subscribe on YouTube",
+        desc: "Scripture-first teaching that builds your theological foundation week by week.",
+        url: "https://youtube.com/BeKingdomBuilders",
+        arrow: "Subscribe →"
+      }
+    ]
+  },
+  3: {
+    name: "Freedom",
+    tagline: "The chains don't have the final word.",
+    verse: "\"For the weapons of our warfare are not of the flesh but have divine power to destroy strongholds.\" — 2 Corinthians 10:4",
+    description: `Your results point to Stage 3: Freedom. You know the truth. You believe it. But something keeps blocking you from walking in it — and you're tired of the cycle.
+
+You've confessed the same sin. You've made the same promise. You've tried willpower, accountability, and prayer — and still find yourself returning to the same patterns. That's not a character flaw. That's a stronghold. And strongholds require more than effort. They require the specific biblical process of recognition, repentance, renewal, replacement, and accountability.
+
+The war is already won. You just need the weapons.`,
+    block: `The Freedom stage is for believers who know the truth but are bound by persistent sin patterns, strongholds, or mindsets that block obedience. This stage identifies the chains and tears them out at the root — through Scripture, repentance, and Spirit-led accountability. Freedom isn't the absence of temptation. It's having a new default response when temptation comes.`,
+    primary: {
+      tag: "Your First Step",
+      title: "Get the Free Breaking Strongholds Ebook",
+      desc: "The exact biblical process for identifying, repenting from, and permanently dismantling what's been holding you captive.",
+      url: "https://bekingdombuilders.com/strongholds",
+      arrow: "Get the Free Ebook →"
+    },
+    secondary: [
+      {
+        tag: "Go Deeper",
+        title: "Break Free Book",
+        desc: "30 strongholds. Biblical decrees and declarations for each one. The full arsenal.",
+        url: "https://bekingdombuilders.com/breakfree",
+        arrow: "Get the Book →"
+      },
+      {
+        tag: "Community",
+        title: "Join the Skool Community",
+        desc: "Freedom thrives in community. Do this work with believers who are serious.",
+        url: "https://skool.com/be-kingdom-builders-3106",
+        arrow: "Join Free →"
+      }
+    ]
+  },
+  4: {
+    name: "Formation",
+    tagline: "Freedom without discipline doesn't last.",
+    verse: "\"Train yourself for godliness; for while bodily training is of some value, godliness is of value in every way.\" — 1 Timothy 4:7-8",
+    description: `Your results point to Stage 4: Formation. You're walking in genuine freedom — that's real. But freedom without daily discipline produces a walk that's inconsistent, reactive, and ultimately unfruitful.
+
+You know the Word. You've broken free from the major chains. But your daily rhythms — prayer, Scripture, accountability, obedience — aren't yet producing the stability that true spiritual maturity requires. Some days you're locked in. Others you drift. The patterns of a formed, Christ-like character haven't fully taken root yet.
+
+Formation is where freedom becomes a lifestyle instead of an event.`,
+    block: `The Formation stage is for believers walking in freedom but lacking the daily consistency to stay fruitful. This stage builds the spiritual disciplines and character rhythms that produce a stable, obedient walk with God. You've broken the chains — now it's time to build the life.`,
+    primary: {
+      tag: "Your First Step",
+      title: "Join the Free Kingdom Builders Community",
+      desc: "The Formation track in our Skool community is built for exactly where you are — structured disciplines, real accountability, and consistent growth.",
+      url: "https://skool.com/be-kingdom-builders-3106",
+      arrow: "Join Free →"
+    },
+    secondary: [
+      {
+        tag: "Weekly Teaching",
+        title: "Subscribe on YouTube",
+        desc: "Consistent teaching on spiritual disciplines, obedience, and Kingdom character.",
+        url: "https://youtube.com/BeKingdomBuilders",
+        arrow: "Subscribe →"
+      },
+      {
+        tag: "Resource",
+        title: "Break Free Book",
+        desc: "Daily declarations to reinforce your freedom and build new spiritual patterns.",
+        url: "https://bekingdombuilders.com/breakfree",
+        arrow: "Get the Book →"
+      }
+    ]
+  },
+  5: {
+    name: "Commission",
+    tagline: "You weren't built to stay inward.",
+    verse: "\"Go therefore and make disciples of all nations... teaching them to observe all that I have commanded you.\" — Matthew 28:19-20",
+    description: `Your results point to Stage 5: Commission. You're grounded. You're free. You're formed. Now the focus shifts — outward.
+
+The Commission stage isn't a reward for finishing. It's a calling that was always the destination. Jesus didn't call you to get free so you could be comfortable. He called you to multiply — to take what God has built in you and pour it into the people, communities, and spheres where He's already placed you.
+
+If you're here and not yet actively discipling, leading, or building, that's the gap. It's not knowledge or freedom you need more of. It's deployment.`,
+    block: `The Commission stage is for grounded, free, and formed believers ready to shift their focus outward. This stage deploys you into active Kingdom building — serving, leading, and multiplying disciples where God has already placed you. The Great Commission isn't a program. It's your purpose.`,
+    primary: {
+      tag: "Your First Step",
+      title: "Join the Free Kingdom Builders Community",
+      desc: "Connect with other Commission-stage believers who are actively building — and find your next step in multiplying Kingdom impact.",
+      url: "https://skool.com/be-kingdom-builders-3106",
+      arrow: "Join Free →"
+    },
+    secondary: [
+      {
+        tag: "Weekly Teaching",
+        title: "Subscribe on YouTube",
+        desc: "Teaching on spiritual authority, Kingdom leadership, and bold obedience.",
+        url: "https://youtube.com/BeKingdomBuilders",
+        arrow: "Subscribe →"
+      },
+      {
+        tag: "Resource",
+        title: "Engaging Islam Book",
+        desc: "Equip yourself to defend the faith and lead others to Christ with confidence.",
+        url: "https://bekingdombuilders.com",
+        arrow: "Get the Book →"
+      }
+    ]
+  }
+};
+
+// State
+let currentQuestion = 0;
+let answers = [];
+let selectedOption = null;
+let userScore = 0;
+let resultStage = null;
+
+function getStageFromScore(score) {
+  const avg = score / 10;
+  if (avg <= 1.5) return 1;
+  if (avg <= 2.5) return 2;
+  if (avg <= 3.5) return 3;
+  if (avg <= 4.2) return 4;
+  return 5;
+}
+
+function renderQuestion() {
+  const q = questions[currentQuestion];
+  const container = document.getElementById('quiz-container');
+  const progressWrap = document.getElementById('progress-wrap');
+  const header = document.getElementById('assessment-header');
+
+  header.classList.add('hidden');
+  progressWrap.classList.remove('hidden');
+
+  // Update progress
+  const pct = ((currentQuestion + 1) / questions.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-count').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+
+  const prev = answers[currentQuestion];
+
+  container.innerHTML = `
+    <div class="question-card">
+      <span class="question-number">Question ${q.id} of ${questions.length}</span>
+      <p class="question-text">${q.text}</p>
+      <div class="options-list">
+        ${q.options.map((opt, i) => `
+          <button class="option-btn ${prev && prev.index === i ? 'selected' : ''}" onclick="selectOption(this, ${i}, ${opt.score})">
+            <div class="option-indicator">${prev && prev.index === i ? '' : ''}</div>
+            <span class="option-text">${opt.text}</span>
+          </button>
+        `).join('')}
+      </div>
+    </div>
+    <div class="nav-row">
+      ${currentQuestion > 0 ? `<button class="btn-back" onclick="goBack()">← Back</button>` : `<div></div>`}
+      <button class="btn-next" id="btn-next" onclick="goNext()" ${prev ? '' : 'disabled'}>
+        ${currentQuestion === questions.length - 1 ? 'See My Results →' : 'Next Question →'}
+      </button>
+    </div>
+  `;
+
+  selectedOption = prev ? prev.score : null;
+}
+
+function selectOption(el, index, score) {
+  document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedOption = score;
+  answers[currentQuestion] = { index, score };
+  document.getElementById('btn-next').disabled = false;
+}
+
+function goNext() {
+  if (selectedOption === null) return;
+  currentQuestion++;
+  if (currentQuestion >= questions.length) {
+    showFormGate();
+  } else {
+    renderQuestion();
+  }
+}
+
+function goBack() {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    renderQuestion();
+  }
+}
+
+function showFormGate() {
+  document.getElementById('quiz-container').classList.add('hidden');
+  document.getElementById('progress-wrap').classList.add('hidden');
+  document.getElementById('form-gate').classList.remove('hidden');
+
+  // Calc score
+  userScore = answers.reduce((sum, a) => sum + a.score, 0);
+  resultStage = getStageFromScore(userScore);
+}
+
+function revealResults() {
+  const first = document.getElementById('field-first').value.trim();
+  const email = document.getElementById('field-email').value.trim();
+  const errorEl = document.getElementById('form-error');
+
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  if (!first || !emailValid) {
+    errorEl.style.display = 'block';
+    if (!first) document.getElementById('field-first').classList.add('error');
+    if (!emailValid) document.getElementById('field-email').classList.add('error');
+    return;
+  }
+
+  errorEl.style.display = 'none';
+
+  // Submit to HubSpot Forms API
+  submitToHubSpot(first, document.getElementById('field-last').value.trim(), email, resultStage);
+
+  // Show results
+  document.getElementById('form-gate').classList.add('hidden');
+  renderResults(first);
+}
+
+function submitToHubSpot(firstName, lastName, email, stage) {
+  const portalId = 'YOUR_PORTAL_ID'; // Replace with BKB HubSpot portal ID
+  const formId = 'YOUR_FORM_ID';     // Replace with HubSpot form ID for this assessment
+
+  const stageName = stages[stage] ? stages[stage].name : 'Unknown';
+
+  const payload = {
+    fields: [
+      { name: 'firstname', value: firstName },
+      { name: 'lastname', value: lastName },
+      { name: 'email', value: email },
+      { name: 'kingdom_builder_stage', value: stageName }
+    ],
+    context: {
+      pageUri: window.location.href,
+      pageName: 'Kingdom Builder Assessment'
+    }
+  };
+
+  fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(err => console.warn('HubSpot submission error:', err));
+}
+
+function renderResults(firstName) {
+  const stage = stages[resultStage];
+  const container = document.getElementById('results-container');
+  container.classList.remove('hidden');
+
+  // Stage dots
+  const dots = Array.from({length: 5}, (_, i) => {
+    const n = i + 1;
+    let cls = 'stage-dot';
+    if (n < resultStage) cls += ' passed';
+    if (n === resultStage) cls += ' active';
+    return `<div class="${cls}"></div>`;
+  }).join('');
+
+  container.innerHTML = `
+    <div style="text-align:center; margin-bottom: 10px;">
+      <span style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--violet);">
+        ${firstName ? firstName + ', your stage is' : 'Your stage is'}
+      </span>
+    </div>
+
+    <div class="stage-indicator">${dots}</div>
+
+    <span class="result-stage-label">Kingdom Builder Stage ${resultStage} of 5</span>
+    <h2 class="result-stage-name"><span>${stage.name}</span></h2>
+    <p class="result-verse">${stage.tagline}</p>
+
+    <div class="result-card">
+      <h3>Where You Are</h3>
+      ${stage.description.split('\n\n').map(p => `<p>${p.trim()}</p>`).join('')}
+      <p class="scripture">${stage.verse}</p>
+    </div>
+
+    <div class="result-card">
+      <h3>What This Stage Is</h3>
+      <p>${stage.block}</p>
+    </div>
+
+    <div class="result-card">
+      <h3>Your Next Steps</h3>
+      <p style="margin-bottom: 20px; color: var(--alabaster-dim); font-size: 15px;">Don't just read this and move on. One obedient step forward is worth more than a hundred good intentions.</p>
+    </div>
+
+    <div class="next-steps-grid">
+      <a href="${stage.primary.url}" target="_blank" class="next-step-card primary">
+        <span class="step-tag">${stage.primary.tag}</span>
+        <div class="step-title">${stage.primary.title}</div>
+        <div class="step-desc">${stage.primary.desc}</div>
+        <span class="step-arrow">${stage.primary.arrow}</span>
+      </a>
+      ${stage.secondary.map(s => `
+        <a href="${s.url}" target="_blank" class="next-step-card">
+          <span class="step-tag">${s.tag}</span>
+          <div class="step-title">${s.title}</div>
+          <div class="step-desc">${s.desc}</div>
+          <span class="step-arrow">${s.arrow}</span>
+        </a>
+      `).join('')}
+    </div>
+
+    <div style="text-align:center; margin-top: 40px; padding: 28px; background: var(--night-2); border: 1px solid rgba(241,233,219,0.08); border-radius: 4px;">
+      <span style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--violet); display:block; margin-bottom:10px;">Be Kingdom Builders</span>
+      <p style="font-size:14px; color:var(--alabaster-dim); line-height:1.6; max-width:440px; margin:0 auto;">Leave the Sidelines. Build the Kingdom.<br>Check your email — your results and next steps are on their way.</p>
+    </div>
+  `;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Start
+renderQuestion();
+</script>
+</body>
+</html>
